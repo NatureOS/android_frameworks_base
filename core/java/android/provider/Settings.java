@@ -3574,6 +3574,13 @@ public final class Settings {
         public static final String STATUS_BAR_DATE_FORMAT = "status_bar_date_format";
 
         /**
+         * Toast animations
+         *
+         * @hide
+         */
+        public static final String TOAST_ANIMATION = "toast_animation";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
