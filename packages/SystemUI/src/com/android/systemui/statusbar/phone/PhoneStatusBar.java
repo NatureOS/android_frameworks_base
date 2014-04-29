@@ -138,6 +138,7 @@ import com.android.systemui.qs.QSDragPanel;
 import com.android.systemui.recents.ScreenPinningRequest;
 import com.android.systemui.statusbar.ActivatableNotificationView;
 import com.android.systemui.statusbar.BackDropView;
+import com.android.systemui.statusbar.AppSidebar;
 import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.DismissView;
@@ -481,6 +482,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.SHOW_FOURG), false, this, UserHandle.USER_ALL);  	
             resolver.registerContentObserver(CMSettings.System.getUriFor(
                     CMSettings.System.LOCKSCREEN_BLUR_RADIUS), false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.APP_SIDEBAR_POSITION),
+                    false, this, UserHandle.USER_ALL);	
             update();
         }
 
@@ -993,6 +997,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         checkUserAutohide(v, event);
                         return false;
                     }});
+		
             }
         } catch (RemoteException ex) {
             // no window manager? good luck with that
@@ -1001,6 +1006,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         if (mAssistManager == null) {
             mAssistManager = new AssistManager(this, context);
         }
+		
+		addSidebarView();    
+		
         if (mNavigationBarView == null) {
             mAssistManager.onConfigurationChanged();
         }
@@ -1358,6 +1366,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         // receive broadcasts
         IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
         filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
@@ -3611,6 +3620,24 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 finishBarAnimations();
                 resetUserExpandedStates();
             }
+            else if (Intent.ACTION_CONFIGURATION_CHANGED.equals(action)) {
+                Configuration config = mContext.getResources().getConfiguration();
+                try {
+                    // position app sidebar on left if in landscape orientation and device has a navbar
+                    if (mWindowManagerService.hasNavigationBar() &&
+                            config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        mWindowManager.updateViewLayout(mAppSidebar,
+                                getAppSidebarLayoutParams(AppSidebar.SIDEBAR_POSITION_LEFT));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mAppSidebar.setPosition(AppSidebar.SIDEBAR_POSITION_LEFT);
+                            }
+                        }, 500);
+                    }
+                } catch (RemoteException e) {
+                }
+            }
             else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 mScreenOn = true;
                 notifyNavigationBarScreenOn(true);
@@ -3767,6 +3794,17 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
         if (mDockBatteryController != null) {
             mDockBatteryController.setUserId(mCurrentUserId);
+        }
+    }
+
+    private void updateSettings() {
+        ContentResolver resolver = mContext.getContentResolver();
+        int sidebarPosition = Settings.System.getInt(resolver,
+                Settings.System.APP_SIDEBAR_POSITION, 
+                AppSidebar.SIDEBAR_POSITION_LEFT);
+        if (sidebarPosition != mSidebarPosition) {
+            mSidebarPosition = sidebarPosition;
+            mWindowManager.updateViewLayout(mAppSidebar, getAppSidebarLayoutParams(sidebarPosition));
         }
     }
 
