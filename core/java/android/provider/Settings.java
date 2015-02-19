@@ -3699,6 +3699,12 @@ public final class Settings {
          */
         public static final String CLOCK_USE_SECOND = "clock_use_second";
 
+		/** 
+         * Alternative recent apps integration using OmniSwitch
+         * @hide
+         */
+        public static final String RECENTS_USE_OMNISWITCH = "recents_use_omniswitch";		
+		
         /**
          * Switch for headset icon
          * @hide
