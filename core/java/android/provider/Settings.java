@@ -3538,6 +3538,13 @@ public final class Settings {
                 "volume_keys_control_ring_stream";
 
         /**
+        /**
+         * Statusbar Bliss logo
+         * @hide
+         */
+        public static final String STATUS_BAR_BLISS_LOGO = "status_bar_bliss_logo";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
