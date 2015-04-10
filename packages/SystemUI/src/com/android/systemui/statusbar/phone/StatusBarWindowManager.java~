@@ -36,7 +36,10 @@ import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import cyanogenmod.providers.CMSettings;
+<<<<<<< HEAD
 import org.cyanogenmod.internal.util.CmLockPatternUtils;
+=======
+>>>>>>> c2f1ce3... Frameworks: Lockscreen see through (2/3)
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
