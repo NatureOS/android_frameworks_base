@@ -34,6 +34,7 @@ import android.text.format.DateFormat;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.systemui.DemoMode;
@@ -95,6 +96,9 @@ public class Clock extends TextView implements DemoMode {
                     this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.STATUS_BAR_DATE_FORMAT), false,
+                    this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.STATUSBAR_CLOCK_COLOR), false,
                     this, UserHandle.USER_ALL);
             updateSettings();
         }
@@ -318,24 +322,34 @@ public class Clock extends TextView implements DemoMode {
                 Settings.System.STATUS_BAR_DATE_STYLE, CLOCK_DATE_STYLE_REGULAR,
                 UserHandle.USER_CURRENT);
 
-        second = new TimerTask()
-        {
-            @Override
-            public void run()
-             {
-                Runnable updater = new Runnable()
-                  {
-                   public void run()
-                   {
-                       updateClock();
-                   }
-                  };
-                handler.post(updater);
-             }
-        };
-        Timer timer = new Timer();
-        timer.schedule(second, 0, 1001);
+        int defaultColor = mContext.getResources().getColor(R.color.status_bar_clock_color);
+        int clockColor = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK_COLOR, defaultColor,
+                UserHandle.USER_CURRENT);
+        if (clockColor == Integer.MIN_VALUE) {
+            // flag to reset the color
+            clockColor = defaultColor;
+        }
 
+        second = new TimerTask()  
+        {  
+            @Override  
+            public void run()  
+             {  
+                Runnable updater = new Runnable()  
+                  {  
+                   public void run()  
+                   {  
+                       updateClock();  
+                   }  
+                  };  
+                handler.post(updater);  
+             }  
+        };  
+         Timer timer = new Timer();  
+        timer.schedule(second, 0, 1001);  
+  		
+        setTextColor(clockColor);
         updateClock();
     }
 
