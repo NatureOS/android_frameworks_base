@@ -3716,6 +3716,12 @@ public final class Settings {
         public static final String CLOCK_USE_SECOND = "clock_use_second";
 
         /**
+         * Switch for headset icon
+         * @hide
+         */
+        public static final String SHOW_HEADSET_ICON = "show_headset_icon";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
