@@ -992,8 +992,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     }});
 
         addGestureAnywhereView();
-	    addSidebarView();
-
+        addSidebarView();
+        addAppCircleSidebar();
+		
             }
         } catch (RemoteException ex) {
             // no window manager? good luck with that
