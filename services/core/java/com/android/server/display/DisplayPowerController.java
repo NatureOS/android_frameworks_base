@@ -270,9 +270,6 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
     private ObjectAnimator mColorFadeOffAnimator;
     private RampAnimator<DisplayPowerState> mScreenBrightnessRampAnimator;
 
-    private static final int MAX_BLUR_WIDTH = 900;
-    private static final int MAX_BLUR_HEIGHT = 1600;
-
     private KeyguardServiceWrapper mKeyguardService;
 
     private final ServiceConnection mKeyguardConnection = new ServiceConnection() {
@@ -469,6 +466,7 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
                         && request.policy == DisplayPowerRequest.POLICY_OFF) {
                     boolean seeThrough = CMSettings.System.getBoolean(mContext.getContentResolver(),
                             CMSettings.System.LOCKSCREEN_SEE_THROUGH, false);
+                    Bitmap bmp = null;
                     if (seeThrough) {
                         WindowManager wm = (WindowManager)
                                 mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -476,34 +474,16 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
                         Point point = new Point();
                         display.getRealSize(point);
                         int rotation = display.getRotation();
-                        boolean shouldReverse = rotation == Surface.ROTATION_90
-                                || rotation == Surface.ROTATION_270;
+                        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+                            point.set(point.y, point.x);
+                        }
+
                         /* Limit max screenshot capture layer to 22000.
                            Prevents status bar and navigation bar from being captured. */
-                        Bitmap bmp = null;
-                        if (shouldReverse) {
-                            bmp = SurfaceControl.screenshot(new Rect(),
-                                    point.y, point.x, 0, 22000, false, Surface.ROTATION_0);
-                        } else {
-                            bmp = SurfaceControl.screenshot(new Rect(),
-                                    point.x, point.y, 0, 22000, false, Surface.ROTATION_0);
-                        }
-
-                        if (bmp != null) {
-                            Bitmap tmpBmp = bmp;
-                            // scale image if its too large
-                            if (bmp.getWidth() > MAX_BLUR_WIDTH) {
-                                tmpBmp = bmp.createScaledBitmap(
-                                        bmp, MAX_BLUR_WIDTH, MAX_BLUR_HEIGHT, true);
-                            }
-                            mKeyguardService.setBackgroundBitmap(tmpBmp);
-
-                            bmp.recycle();
-                            tmpBmp.recycle();
-                        }
-                    } else {
-                        mKeyguardService.setBackgroundBitmap(null);
+                        bmp = SurfaceControl.screenshot(new Rect(),
+                                point.x, point.y, 0, 22000, false, Surface.ROTATION_0);
                     }
+                    mKeyguardService.setBackgroundBitmap(bmp);
                 }
                 mPendingRequestChangedLocked = true;
                 sendUpdatePowerStateLocked();
