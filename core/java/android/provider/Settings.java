@@ -4145,26 +4145,32 @@ public final class Settings {
         @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
         public static final String GESTURE_ANYWHERE_SHOW_TRIGGER = "gesture_anywhere_show_trigger";
 
-	/** Wheither navigation bar is enabled or not
-	 * @hide
-	 */
-	public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
+	    /** Wheither navigation bar is enabled or not
+	     * @hide
+	     */
+	    public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
 
-	/** Navbar height
+	    /** Navbar height
          * @hide
          */
-	public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+	    public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 
-	/** Navbar height in landscape
+	    /** Navbar height in landscape
          * @hide
          */
-	public static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
+	    public static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
 
-	/** Navbar width
+	    /** Navbar width
          * @hide
          */
-	public static final String NAVIGATION_BAR_WIDTH = "navigation_bar_width";
+	    public static final String NAVIGATION_BAR_WIDTH = "navigation_bar_width";
 
+        /**
+         * Navigation bar button color
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_TINT = "navigation_bar_tint";
+	
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
