@@ -352,6 +352,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private QSDragPanel mQSPanel;
     private QSTileHost mQSTileHost;
     private DevForceNavbarObserver mDevForceNavbarObserver;
+	
+	private boolean mShow4G; 
 
     // top bar
     StatusBarHeaderView mHeader;
@@ -471,6 +473,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_BLISS_LOGO), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_BLISS_LOGO_COLOR), false, this, UserHandle.USER_ALL);
+	        resolver.registerContentObserver(Settings.System.getUriFor(  
+                    Settings.System.SHOW_FOURG), false, this, UserHandle.USER_ALL);  	
             update();
         }
 
@@ -491,8 +495,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mAutomaticBrightness = mode != Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
             mBrightnessControl = CMSettings.System.getIntForUser(
                     resolver, CMSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0,
-                    UserHandle.USER_CURRENT) == 1;
+                    UserHandle.USER_CURRENT) == 1;			
 
+            boolean mShow4G = Settings.System.getIntForUser(resolver,  
+                    Settings.System.SHOW_FOURG, 0, UserHandle.USER_CURRENT) == 1;
+					
             if (mNavigationBarView != null) {
                 boolean navLeftInLandscape = CMSettings.System.getIntForUser(resolver,
                         CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0, UserHandle.USER_CURRENT) == 1;
