@@ -109,14 +109,6 @@ public class KeyguardStatusBarView extends RelativeLayout {
                         com.android.internal.R.dimen.text_size_small_material));
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (mUserInfoController != null) {
-            mUserInfoController.removeListener(mUserInfoChangedListener);
-        }
-    }
-
     private void loadDimens() {
         mSystemIconsSwitcherHiddenExpandedMargin = getResources().getDimensionPixelSize(
                 R.dimen.system_icons_switcher_hidden_expanded_margin);
