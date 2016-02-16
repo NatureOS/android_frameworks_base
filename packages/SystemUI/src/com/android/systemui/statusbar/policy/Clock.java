@@ -371,20 +371,20 @@ public class Clock extends TextView implements DemoMode {
     public void getFontStyle(int font) {
         switch (font) {
             case FONT_BOLD:
-                mClockView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+                setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
                 break;
             case FONT_CONDENSED:
-                mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+                setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
                 break;
             case FONT_LIGHT:
-                mClockView.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+                setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
                 break;
             case FONT_LIGHT_ITALIC:
-                mClockView.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
+                setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
                 break;
             case FONT_NORMAL:
             default:
-                mClockView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+                setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
                 break;
         }
     }
