@@ -33,7 +33,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.util.aicp.AicpUtils;
+import com.android.internal.util.bliss.BlissUtils;
 import com.android.systemui.utils.SpnOverride;
 
 import java.text.SimpleDateFormat;
