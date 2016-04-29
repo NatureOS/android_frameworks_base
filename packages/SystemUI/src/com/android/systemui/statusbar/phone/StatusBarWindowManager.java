@@ -135,9 +135,7 @@ public class StatusBarWindowManager implements KeyguardMonitor.Callback {
     private void applyKeyguardFlags(State state) {
         if (state.keyguardShowing) {
             mLpChanged.privateFlags |= WindowManager.LayoutParams.PRIVATE_FLAG_KEYGUARD;
-            boolean seeThroughEnabled = CMSettings.System.getBoolean(mContext.getContentResolver(),
-                    CMSettings.System.LOCKSCREEN_SEE_THROUGH, false);
-            if (!mKeyguardBlurEnabled && !seeThroughEnabled) {
+            if (!mKeyguardBlurEnabled) {
                 mLpChanged.flags |= WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
             }
         } else {
