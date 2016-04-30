@@ -28,6 +28,7 @@ import android.database.ContentObserver;
 import android.hardware.input.InputManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.provider.Settings;
