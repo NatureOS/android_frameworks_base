@@ -126,6 +126,7 @@ public class KeyguardStatusBarView extends RelativeLayout {
         mBatteryLevel.setVisibility(View.VISIBLE);
         if (mDockBatteryLevel != null) {
             mDockBatteryLevel.setVisibility(View.VISIBLE);
+        }
 
         if (mCarrierLabel != null) {
             if (mShowCarrierLabel == 1) {
