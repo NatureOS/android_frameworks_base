@@ -2649,8 +2649,8 @@
     <public type="style" name="ThemeOverlay.Material.Dialog" id="0x010302d6" />
     <public type="style" name="ThemeOverlay.Material.Dialog.Alert" id="0x010302d7" />
 
-    <public type="id" name="pasteAsPlainText" id="0x01020031" />
-    <public type="id" name="undo" id="0x01020032" />
+    <public type="id" name="pasteAsPlainText" id="0x0102003d" />
+    <public type="id" name="undo" id="0x0102003e" />
     <public type="id" name="redo" id="0x01020033" />
     <public type="id" name="replaceText" id="0x01020034" />
     <public type="id" name="shareText" id="0x01020035" />
