@@ -18,7 +18,7 @@
 <resources>
     
     <!-- Boot dexopt layout -->
-    <color name="dexopt_background">#000</color>
+    <color name="dexopt_background">#95a5a6</color>
     <color name="dexopt_text">#fff</color>
 
 </resources>
