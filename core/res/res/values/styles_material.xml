@@ -705,6 +705,14 @@ please see styles_device_defaults.xml.
         <item name="minHeight">16dip</item>
         <item name="maxHeight">16dip</item>
     </style>
+	
+    <style name="Widget.Material.ProgressBar.Horizontal.dexopt" parent="Widget.ProgressBar.Horizontal">
+        <item name="progressDrawable">@drawable/progress_horizontal_material_dexopt</item>
+        <item name="indeterminateDrawable">@drawable/progress_indeterminate_horizontal_material</item>
+        <item name="minHeight">16dip</item>
+        <item name="maxHeight">16dip</item>
+    </style>
+	
 
     <style name="Widget.Material.ProgressBar.Small" parent="Widget.ProgressBar.Small">
         <item name="indeterminateDrawable">@drawable/progress_small_material</item>
