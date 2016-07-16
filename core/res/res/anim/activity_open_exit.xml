@@ -22,5 +22,5 @@
     <alpha android:fromAlpha="1.0" android:toAlpha="0.1"
             android:fillEnabled="true" android:fillBefore="false" android:fillAfter="true"
             android:interpolator="@interpolator/fast_out_slow_in"
-            android:duration="30"/>
+            android:duration="100"/>
 </set>
