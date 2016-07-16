@@ -21,7 +21,6 @@
         <shape android:shape="rectangle"
                android:tint="@color/switch_track_material">
             <corners android:radius="7dp" />
-            <solid android:color="@color/white_disabled_material" />
             <size android:height="14dp" />
         </shape>
     </item>
