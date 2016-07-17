@@ -243,7 +243,6 @@ public class WindowAnimator {
         if (winKeyguardPanel == null) {
             keyguardOn &= !mKeyguardBlurEnabled;
         }
-                && (mForceHiding != KEYGUARD_ANIMATING_OUT && !mBlurUiEnabled && !seeThrough);
         return keyguardOn && !allowWhenLocked && (win.getDisplayId() == Display.DEFAULT_DISPLAY);
     }
 
@@ -255,7 +254,7 @@ public class WindowAnimator {
         final boolean seeThrough = CMSettings.System.getBoolean(mContext.getContentResolver(),
                 CMSettings.System.LOCKSCREEN_SEE_THROUGH, false);
 
-        if (mKeyguardGoingAway && !mBlurUiEnabled && !seeThrough) {
+        if (mKeyguardGoingAway && !mKeyguardBlurEnabled && !seeThrough) {
             for (int i = windows.size() - 1; i >= 0; i--) {
                 WindowState win = windows.get(i);
                 if (!mPolicy.isKeyguardHostWindow(win.mAttrs)) {
