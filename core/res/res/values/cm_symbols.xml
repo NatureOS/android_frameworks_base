@@ -157,4 +157,7 @@
 
     <!-- Usb drive persistent notification -->
     <java-symbol type="bool" name="config_persistUsbDriveNotification" />
+
+    <!-- Use alternative way to blur lockscreen -->
+    <java-symbol type="bool" name="config_use_stackblur" />
 </resources>
